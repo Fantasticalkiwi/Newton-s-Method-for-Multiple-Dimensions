@@ -1,0 +1,7 @@
+F = zeros(3,1);
+X = [1,1,1]
+[F,J] = test_function01(X)
+for i = 1:300
+[F,J] = test_function01(X)
+X1 = X - F
+end
