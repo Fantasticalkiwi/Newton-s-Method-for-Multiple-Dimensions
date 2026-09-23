@@ -1,0 +1,47 @@
+%implement root finder using the Newton Method
+%INPUTS:
+%fun: the mathetmatical function we want to solve
+%x0: the initial guess
+%max_iter: limit of max iterations
+% dxtol: termination threshold (stop when interval abs(dx) < dxtol)
+% ftol: termination threshold (stop when abs(f)<ftol
+% terminate when abs(-dx) > dxmax, where dxmax is a very large number
+%OUTPUTS:
+%x: approximate root of function
+%flag: 1 is success, 0 is failure
+function [x,flag] = newton_solver1(fun,x0,max_iter,ftol,dxtol,dx_max)
+    for i = 1:max_iter
+        [f,dfdx] = fun(x0);
+        
+        if abs(f) < ftol
+            %fprintf('ftol\n');
+            x = x0;
+            %flag = 1;
+            return
+        end
+
+        dx = -f\dfdx;
+        
+        if abs(dx) > dx_max
+            %dx = sign(dx)*dx_max;
+            %flag = 0; 
+            x = x0;
+            return
+        end
+
+        x1=x0+dx;
+
+        if abs(dx) <= dxtol
+            %fprintf('dxtol\n');
+            x = x1;
+            %flag = 1;
+            return
+        end
+
+        x0 = x1;
+        hold on
+    end
+    x = x0
+    %flag = 0;
+    %fprintf('max_iter\n')
+end
