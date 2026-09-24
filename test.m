@@ -7,3 +7,10 @@ end
 
 X
 [F,J] = test_function01(X)
+
+
+if [0 1 1 1]
+    disp('true')
+else
+    disp('WRONG')
+end

@@ -7,14 +7,14 @@
 %J: approximation of Jacobian of fun at x
 function J = approximate_jacobian(fun,X)
     %set the step size to be tiny
-    dx_scalar = 1e-6;
+    h = 1e-6;
     
     f0 = fun(X); %evaluate function to determine number of outputs
     
     num_in = length(X);     %determine dimension of the input vector
     num_out = length(f0);   %determine dimension of the output vector
     
-    %initialize the dx vector
+    %initialize the dX vector
     dX = zeros(size(X));
 
     %initialize the Jacobian to be a matrix
@@ -23,22 +23,23 @@ function J = approximate_jacobian(fun,X)
 
     %iterate through each scalar input of fun
     for n = 1:num_in
-        %set dx vector so it has the form:
-        %[0,...,0,dx_scalar,0,...,0]^T
-        %where the nonzero element is at dx
-        dX(n) = dx_scalar;
-
+        %set dX vector so it has the form:
+        %[0,...,0,h,0,...,0]^T
+        %where the nonzero element is at dX
+        dX(n) = h;
+        
         %Use finite differences to compute the vector dfun/dx_n
         %partial derivative of the function 
         %w/respect to the nth element of X
         %the result should be a vector quantity
+        f_right = fun(X+dX);
+        f_left = fun(X-dX); 
 
-        %YOUR CODE HERE
+        %approximate the first derivative
+        dfdx = (f_right-f_left)./(2*h);
 
         %Set the nth column of J to dfun/dx_n
-
-        %YOUR CODE HERE
-
+        J(:,n) = dfdx;
 
         dX(n) = 0; %reset the dx vector to [0,...,0]^T
     end
