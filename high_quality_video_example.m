@@ -48,12 +48,14 @@ function high_quality_video_example()
 
         % this function is just a template right now
         update_leg_drawing(vertex_coords_root, leg_drawing, leg_params);
+        axis([-115,65,-115,65])
         drawnow;
         %capture a frame (what is currently plotted)
         current_frame = getframe(fig1);
         
         %write the frame to the video
         writeVideo(writerObj,current_frame);
+
     end
     
     %must call close after all frames are written to save the video
