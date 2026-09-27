@@ -14,7 +14,8 @@ function update_leg_drawing(complete_vertex_coords, leg_drawing, leg_params)
         
         %linkage_index is the label of the current link
         %your code here
-        [vertexA, vertexB] = leg_params.link_to_vertex_list{linkage_index}
+        A = leg_params.link_to_vertex_list(linkage_index, 1);
+        B = leg_params.link_to_vertex_list(linkage_index, 2);        
         Ax = complete_vertex_coords(A*2-1);
         Ay = complete_vertex_coords(A*2);
         Bx = complete_vertex_coords(B*2-1);
@@ -33,8 +34,8 @@ function update_leg_drawing(complete_vertex_coords, leg_drawing, leg_params)
         %dot_x and dot_y should both be scalars
         %specifically the x and y coordinates of the corresponding vertex
         
-        dot_x = complete_vertex_coords(vertex_index*2-1)
-        dot_y = complete_vertex_coords(vertex_index*2)
+        dot_x = complete_vertex_coords(vertex_index*2-1);
+        dot_y = complete_vertex_coords(vertex_index*2);
         set(leg_drawing.vertices{vertex_index},'xdata',dot_x,'ydata',dot_y); 
     end
 
@@ -42,8 +43,8 @@ function update_leg_drawing(complete_vertex_coords, leg_drawing, leg_params)
     Ay = complete_vertex_coords(2);
     %crank_x and crank_y should both be two element arrays
     %containing the x and y coordinates of the line segment describing the crank
-    crank_x = [Ax]
-    crank_y = [Ay]
+    crank_x = [Ax];
+    crank_y = [Ay];
     
     set(leg_drawing.crank,'xdata',crank_x,'ydata',crank_y);
 end
