@@ -37,8 +37,10 @@ function high_quality_video_example()
     ];   
 
     leg_drawing = initialize_leg_drawing(leg_params);
-    
-    frames = 1:100000;
+    xlabel("x position");
+    ylabel("y position");
+    title("Strandbeest simulation")
+    frames = 1:500;
     for t = frames
 
         theta = pi/120*t% loop through using frames
@@ -49,6 +51,7 @@ function high_quality_video_example()
         % this function is just a template right now
         update_leg_drawing(vertex_coords_root, leg_drawing, leg_params);
         axis([-115,65,-115,65])
+        
         drawnow;
         %capture a frame (what is currently plotted)
         current_frame = getframe(fig1);
