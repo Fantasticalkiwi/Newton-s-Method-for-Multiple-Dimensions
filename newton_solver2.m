@@ -35,7 +35,7 @@ function [X, exit_flag] = newton_solver2(fun,X0,numerical_diff,dxmin,ftol,max_it
     
     % loop through newton's method until the root is found, or until
     % the iteration maximum is hit
-    while any(interval_flag,'all') && all(value_flag) && iteration_flag
+    while any(interval_flag,'all') && value_flag && iteration_flag
 
         if numerical_diff == 0
             [F,J] = fun(X);
@@ -50,7 +50,7 @@ function [X, exit_flag] = newton_solver2(fun,X0,numerical_diff,dxmin,ftol,max_it
 
         % check for a denominator of zero or zero determinant of J
         if any(dxmax < abs(dx)) || det(J*J') < dxmin       
-            disp("Zero denominator error, or oversized update step size.")
+            % disp("Zero denominator error, or oversized update step size.")
             exit_flag = 0;              % if true: mark failure and exit
             return                      % the program
         end
@@ -64,9 +64,9 @@ function [X, exit_flag] = newton_solver2(fun,X0,numerical_diff,dxmin,ftol,max_it
         % maximum iteration values reached
         % or iterations are too far apart
         interval_flag = dxmin < abs(X - X0);
-        value_flag = ftol < abs(F);
+        value_flag = any(ftol < abs(F));
         iteration_flag = max_iter > iter;
- 
+
         % else: continue while loop to try and find roots
 
     end
@@ -74,17 +74,19 @@ function [X, exit_flag] = newton_solver2(fun,X0,numerical_diff,dxmin,ftol,max_it
     % success is based on whether the final value is 'close enough' to
     % zero. set exit_flag correspondingly
     
-    if ftol > abs(F)
+    if ~value_flag
         exit_flag = 1;
         return
     elseif ~interval_flag
-        % disp("Iterations tending towards a false root.")
+        %disp("Iterations tending towards a false root.")
         exit_flag = 0;
         return
-    else ~iteration_flag;
-        % disp("Maximum iterations reached.")
+    elseif ~iteration_flag
+        %disp("Maximum iterations reached.")
         exit_flag = 0;
         return
+    else
+        disp("now you've gone and done it")
     end
 
    

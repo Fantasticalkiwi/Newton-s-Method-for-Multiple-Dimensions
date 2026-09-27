@@ -1,4 +1,4 @@
-% X = [3; 3; 3]
+X = [3; 3; 3];
 % [F,J] = test_function01(X)
 % for i = 1:5000
 % [F,J] = test_function01(X);
@@ -15,5 +15,7 @@
 %     disp('WRONG')
 % end
 
-list = [1; 2;
-    3; 4]
+% list = [1; 2;
+%     3; 4]
+
+[ans, flag] = newton_solver2(@test_function01, X)
