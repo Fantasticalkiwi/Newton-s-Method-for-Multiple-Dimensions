@@ -38,6 +38,7 @@ function update_leg_drawing(complete_vertex_coords, leg_drawing, leg_params)
         set(leg_drawing.vertices{vertex_index},'xdata',dot_x,'ydata',dot_y); 
     end
 
+    %your code here
     Ax = complete_vertex_coords(1);
     Ay = complete_vertex_coords(2);
     %crank_x and crank_y should both be two element arrays

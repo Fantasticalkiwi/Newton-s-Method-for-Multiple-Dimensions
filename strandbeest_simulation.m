@@ -22,9 +22,10 @@ function strandbeest_simulation()
     %this code will likely involve a loop, where you call
     %compute_coords at each iteration
     %you likely will also need to call update_leg_drawing each iteration
+    frames = 1:12;
     for t = frames
 
-        theta = % loop through using frames
+        theta = pi/12*t% loop through using frames
 
         % can output exit flag (for testing)
         vertex_coords_root = compute_coords(vertex_coords_guess, leg_params, theta);
