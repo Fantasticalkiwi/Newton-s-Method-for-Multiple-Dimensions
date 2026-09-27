@@ -19,6 +19,7 @@
 %   where (xa,ya) and (xb,yb) are the coordinates of the vertices that
 %   are connected by the ith link, and d_i is the length of the ith link
 function length_errors = link_length_error_func(vertex_coords, leg_params)
+
     % unpack leg_params:
     % distance constraints between links, number of links, vertex connections
     distances = leg_params.link_lengths;

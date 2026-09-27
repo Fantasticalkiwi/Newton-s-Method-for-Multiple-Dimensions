@@ -15,15 +15,17 @@ function coord_errors = fixed_coord_error_func(vertex_coords, leg_params, theta)
     % unpack leg_params: 
     % crank length, fixed vertex positions
     crank_length = leg_params.crank_length;
-    %[x0_fixed, y0_fixed] = leg_params.vertex_pos0;
+    v0 = leg_params.vertex_pos0;
+    x0 = v0(1);
+    y0 = v0(2);
     x2_fixed = leg_params.vertex_pos2(1);
     y2_fixed = leg_params.vertex_pos2(2);
 
     % hard-calc'd position coords of vertex 1, via theta and vertex 0
-    % x1_fixed = x0_fixed + crank_length*cos(theta);
-    % y1_fixed = y0_fixed + crank_length*sin(theta);
-    x1_fixed = crank_length*cos(theta);
-    y1_fixed = crank_length*sin(theta);
+    x1_fixed = x0 + crank_length*cos(theta);
+    y1_fixed = y0 + crank_length*sin(theta);
+    % x1_fixed = crank_length*cos(theta);
+    % y1_fixed = crank_length*sin(theta);
     
     % current position coords
     x1_current = vertex_coords(1);
