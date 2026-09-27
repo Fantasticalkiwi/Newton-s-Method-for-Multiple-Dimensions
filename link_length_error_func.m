@@ -37,10 +37,13 @@ function length_errors = link_length_error_func(vertex_coords, leg_params)
     for i = 1:num_links
         % use vertex connection numbers to index vertex locations that
         % align with link end points
-        x1 = vertices(connections_1(i), 1);
-        x2 = vertices(connections_2(i), 1);
-        y1 = vertices(connections_1(i), 2);
-        y2 = vertices(connections_2(i), 2);
+        A = connections_1(i);
+        B = connections_2(i);
+
+        x1 = vertices(A, 1);
+        x2 = vertices(B, 1);
+        y1 = vertices(A, 2);
+        y2 = vertices(B, 2);
 
         % method that doesn't use column-to-matrix function
         % x1 = vertex_coords(connections_1(i*2-1));
@@ -49,7 +52,7 @@ function length_errors = link_length_error_func(vertex_coords, leg_params)
         % y2 = vertex_coords(connections_2(i*2));
         
         % calculate error
-        length_errors(i) = (x2-x1)^2 + (y2-y1)^2 - distances(i)^2;
+        length_errors(i) = ((x2-x1)^2 + (y2-y1)^2) - distances(i)^2;
     end
 
 end

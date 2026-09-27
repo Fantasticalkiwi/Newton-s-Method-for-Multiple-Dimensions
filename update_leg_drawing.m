@@ -9,18 +9,30 @@
 %       leg_drawing.vertices is a cell array, where each element corresponds
 %       to a plot of one of the vertices in the linkage
 function update_leg_drawing(complete_vertex_coords, leg_drawing, leg_params)
+    % store connections as separate vectors, indexable with one value
+    connections_1 = leg_params.link_to_vertex_list(:,1);
+    connections_2 = leg_params.link_to_vertex_list(:,2);
+
+    % convert vertex_coords vector into an easier-to-handle matrix
+    vertices = column_to_matrix(complete_vertex_coords);
 
     %iterate through each link, and update corresponding link plot
+    %linkage_index is the label of the current link
     for linkage_index = 1:leg_params.num_linkages
+
+        % % method that does not use column_to_matrix     
+        % x1 = complete_vertex_coords(A*2-1);
+        % y1 = complete_vertex_coords(A*2);
+        % x2 = complete_vertex_coords(B*2-1);
+        % y2 = complete_vertex_coords(B*2);
         
-        %linkage_index is the label of the current link
-        %your code here
-        A = leg_params.link_to_vertex_list(linkage_index, 1);
-        B = leg_params.link_to_vertex_list(linkage_index, 2);        
-        x1 = complete_vertex_coords(A*2-1);
-        y1 = complete_vertex_coords(A*2);
-        x2 = complete_vertex_coords(B*2-1);
-        y2 = complete_vertex_coords(B*2);
+        A = connections_1(linkage_index);
+        B = connections_2(linkage_index);
+
+        x1 = vertices(A, 1);
+        x2 = vertices(B, 1);
+        y1 = vertices(A, 2);
+        y2 = vertices(B, 2);
 
         %line_x and line_y should both be two element arrays containing
         %the x and y coordinates of the line segment describing the current link
