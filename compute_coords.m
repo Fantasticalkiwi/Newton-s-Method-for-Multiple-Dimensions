@@ -14,5 +14,4 @@ function [vertex_coords_root, exit_flag] = compute_coords(vertex_coords_guess, l
 
     % pass that wrapper to newtonsolver2
     [vertex_coords_root, exit_flag] = newton_solver2(linkage_error_wrap, vertex_coords_guess);
-    
 end
