@@ -41,7 +41,9 @@ function strandbeest_simulation()
 
         % calculate the vertex coordinates
         vertex_coords_root = compute_coords(vertex_coords_guess, leg_params, theta);
-
+        
+        dVdtheta = compute_velocities(vertex_coords_root, leg_params, theta)
+        
         % use the new coordinates to update the legs
         update_leg_drawing(vertex_coords_root, leg_drawing, leg_params);
 
