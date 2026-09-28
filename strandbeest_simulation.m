@@ -1,4 +1,4 @@
-%runs strandbeest simulation
+    %runs strandbeest simulation
 function strandbeest_simulation()
 
     %set up the plotting axis
@@ -29,34 +29,43 @@ function strandbeest_simulation()
     leg_drawing = initialize_leg_drawing(leg_params);
     xfoot = [];
     yfoot = [];
+    foot_path = plot([0,0],[0,0],color='r');
+    foot_velocity = quiver([],[],[],[],color='g',linewidth=1.5,MaxHeadSize=0.3);
 
-    %this code will likely involve a loop, where you call
-    %compute_coords at each iteration
-    %you likely will also need to call update_leg_drawing each iteration
+    % loop through multiple cycles of theta, updating leg segments and
+    % velocity plot at every frame
     frames = 1:500;
     for t = frames
 
         % loop through using frames
         theta = pi/100*t; 
 
-        % calculate the vertex coordinates
+        % calculate the vertex coordinates & velocities
         vertex_coords_root = compute_coords(vertex_coords_guess, leg_params, theta);
-        
-        dVdtheta = compute_velocities(vertex_coords_root, leg_params, theta)
+        dVdtheta = compute_velocities(vertex_coords_root, leg_params, theta);
         
         % use the new coordinates to update the legs
         update_leg_drawing(vertex_coords_root, leg_drawing, leg_params);
 
-        % lock the axes in place
-        axis([-115,65,-115,65])
-
-        % store the foot vertex and plot as an overlay
+        % store the foot vertex
         foot = leg_drawing.vertices{7,1};
         xfoot(end+1) = foot.XData;
         yfoot(end+1) = foot.YData;
-        plot(xfoot,yfoot)
+
+        % set up plots
+        % lock the axes in place
+        axis([-115,65,-115,65])
+        
+        % plot foot overlay
+        set(foot_path,'xdata',xfoot,'ydata',yfoot)
+
+        % plot fixed points in another color
         plot(0,0, 'b.', MarkerSize=30)
         plot(-38,-7.8, 'b.', MarkerSize=30)
+
+        % plot velocity overlay
+        set(foot_velocity,'xdata',xfoot(end),'ydata',yfoot(end), ...
+            'udata', dVdtheta(13), 'vdata', dVdtheta(14));
 
         drawnow;
     end
