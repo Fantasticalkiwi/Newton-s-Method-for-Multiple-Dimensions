@@ -1,10 +1,10 @@
 %Implementation of finite difference approximation
 %for Jacobian of multidimensional function
 %INPUTS:
-%fun: the mathetmatical function we want to differentiate
-%X: the input value of fun that we want to compute the derivative at
+%   fun: the mathetmatical function we want to differentiate
+%   X: the input value of fun that we want to compute the derivative at
 %OUTPUTS:
-%J: approximation of Jacobian of fun at x
+%   J: approximation of Jacobian of fun at x
 function J = approximate_jacobian(fun,X)
     %set the step size to be tiny
     h = 1e-6;
