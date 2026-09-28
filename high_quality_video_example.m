@@ -5,8 +5,8 @@ function high_quality_video_example()
     %define location and filename where video will be stored
     %written a bit weird to make it fit when viewed in assignment
     %you will need to change the path and file name for your own purposes
-    mypath1 = 'C:\Users\kyue\OneDrive - Olin College of Engineering\Documents\MATLAB\Numerical Methods\Newton-s-Method-for-Multiple-Dimensions';
-    fname='strandbeest_animation.avi';
+    mypath1 = 'C:\Users\jshen\OneDrive - Olin College of Engineering\2026-27\MechEMath\Newton-s-Method-for-Multiple-Dimensions\';
+    fname='strandimation.avi';
     input_fname = [mypath1,fname];
     
     %create a videowriter, which will write frames to the animation file
