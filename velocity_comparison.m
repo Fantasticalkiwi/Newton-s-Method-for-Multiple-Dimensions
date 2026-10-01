@@ -41,22 +41,40 @@ function velocity_comparison()
         ye(i) = dVdtheta_explicit(14);
     end
 
-    % plot lines for each method
+    % plot lines for each method, comparing x-component and theta
     clf
     fig1 = figure(1);
     hold on
-    plot(x,y,linewidth=3,color=[0,.4,.8],displayname='Algebraic Solution')
-    plot(xe,ye,'--',linewidth=3,color=[.3,.8,1],displayname='Finite Difference Solution')
+    plot(theta,x,linewidth=3,color=[0,.4,.8],displayname='Algebraic Solution')
+    plot(theta,xe,'--',linewidth=3,color=[.3,.8,1],displayname='Finite Difference Solution')
     
     % axis labels, title, legend settings
     xlabel("$X$ Position (-)", Interpreter="latex");
     ylabel("$Y$ Position (-)", Interpreter="latex");
-    title("Strandbeest Leg Tip Velocity Calculations: Method Comparison", Interpreter="latex")
-    legend(interpreter="latex")
+    title("Strandbeest Leg Tip Velocity: Calculation Comparison ($X$-component)", Interpreter="latex")
+    legend(interpreter="latex", location="southwest")
 
-    % style settings for resolution, tick mark font, and font size
+    % style settings for resolution, tick mark font, legend, font size, and
+    % axis boundaries
     set(fig1,'units','pixels','position',[0 0 1440 1080])
     set(gca,'TickLabelInterpreter','latex')
     fontsize(scale=2.5)
+    axis([theta(1),theta(end),-50,30])
+
+    % do the same for the y-component
+    fig2 = figure(2);
+    hold on
+    plot(theta,y,linewidth=3,color=[0,.8,.4],displayname='Algebraic Solution')
+    plot(theta,ye,'--',linewidth=3,color=[.3,1,.8],displayname='Finite Difference Solution')
+    
+    xlabel("$X$ Position (-)", Interpreter="latex");
+    ylabel("$Y$ Position (-)", Interpreter="latex");
+    title("Strandbeest Leg Tip Velocity: Calculation Comparison ($Y$-component)", Interpreter="latex")
+    legend(interpreter="latex",location="southwest")
+
+    set(fig2,'units','pixels','position',[0 0 1440 1080])
+    set(gca,'TickLabelInterpreter','latex')
+    fontsize(scale=2.5)
+    axis([theta(1),theta(end),-30,35])
 
 end
