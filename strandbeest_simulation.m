@@ -8,7 +8,7 @@ function strandbeest_simulation(vidflag)
         %written a bit weird to make it fit when viewed in assignment
         %you will need to change the path and file name for your own purposes
         mypath1 = 'C:\Users\jshen\OneDrive - Olin College of Engineering\2026-27\MechEMath\Newton-s-Method-for-Multiple-Dimensions\';
-        fname='strandimation2thesequel.avi';
+        fname='strandimation3biggerbadderbetter';
         input_fname = [mypath1,fname];
         
         %create a videowriter, which will write frames to the animation file
@@ -57,7 +57,7 @@ function strandbeest_simulation(vidflag)
 
     % loop through multiple cycles of theta, updating leg segments and
     % velocity plot at every frame
-    frames = 900;
+    frames = 3000;
     scale = 30;
     c = hsv(frames/scale);
     cloop = repmat(c, [scale,1]);
@@ -97,6 +97,10 @@ function strandbeest_simulation(vidflag)
             'udata', dVdtheta(13), 'vdata', dVdtheta(14));
 
         drawnow;
+
+        if mod(t,25) == 0
+            disp(t)
+        end
 
         if vidflag
             %capture a frame (what is currently plotted)
